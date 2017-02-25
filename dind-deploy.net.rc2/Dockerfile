@@ -1,0 +1,24 @@
+FROM gitlab/dind
+
+WORKDIR var
+
+RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list' && \
+    apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893 && \
+    apt-get update -q && \
+    apt-get install -qy \
+      curl \
+      libuv-dev \
+      dotnet-dev-1.0.0-preview2-003131 \
+      python-setuptools \
+      jq \
+      build-essential \
+      python-pip \
+      libuv0.10 &&\
+    pip install awscli && \
+    apt-get clean apt-get purge && \
+    rm -rf /var/lib/apt/lists/*
+
+
+RUN curl -L https://github.com/silinternational/ecs-deploy/archive/2.5.0.tar.gz | tar xvz && cp ecs-deploy-2.5.0/ecs-deploy /usr/local/bin/ecs-deploy
+
+RUN chmod a+x /usr/local/bin/ecs-deploy
