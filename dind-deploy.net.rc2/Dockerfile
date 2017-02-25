@@ -22,3 +22,12 @@ RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet
 RUN curl -L https://github.com/silinternational/ecs-deploy/archive/2.5.0.tar.gz | tar xvz && cp ecs-deploy-2.5.0/ecs-deploy /usr/local/bin/ecs-deploy
 
 RUN chmod a+x /usr/local/bin/ecs-deploy
+
+# Trigger the population of the local nuget package cache
+ENV NUGET_XMLDOC_MODE skip
+RUN mkdir warmup \
+    && cd warmup \
+    && dotnet new \
+    && cd .. \
+    && rm -rf warmup \
+    && rm -rf /tmp/NuGetScratch
