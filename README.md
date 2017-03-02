@@ -7,4 +7,4 @@ List of my docker images
  - [alpine.npm.python](alpine.npm.python/Dockerfile) - Building container for Node (and Python)
  - [firefly-core](firefly-core/Dockerfile) - Runtime container with .NET Core SDK RC2 for the Firefly.net project. Includes Node.js, npm and a 
  firefly-pdf-render cli tool.
- - [firefly-core-runtime](firefly-core-runtime/Dockerfile) - Same as firefly-core but based on runtime image without sdk (lighter)
+ - [firefly-core-runtime](firefly-core-runtime/Dockerfile) - Container for .NET Core runtimes
